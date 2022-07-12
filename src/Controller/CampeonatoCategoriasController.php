@@ -34,9 +34,29 @@ class CampeonatoCategoriasController extends AppController
     {
         $campeonatoCategoria = $this->CampeonatoCategorias->get($id, [
             'contain' => [
-                'CampeonatoCategoriaGrupos'
+                'CampeonatoCategoriaGrupos' => ['CampeonatoCategoriaGrupoGraduacoes' => ['Graduacoes' => [
+                    'fields' => ['titulo']
+                ]]]
             ],
         ]);
+
+        $campeonatoCategoria->campeonato_categoria_grupos = array_map(function($grupo){
+            $grupo->_graduacoes = [];
+            if ( isset($grupo->campeonato_categoria_grupo_graduacoes) && count($grupo->campeonato_categoria_grupo_graduacoes) > 0 ) {
+
+                $graduacoes = array_map(function($grupo_graduacoes){
+                    if ( isset($grupo_graduacoes->graduaco) ) {
+                        return $grupo_graduacoes->graduaco->titulo;
+                    }
+                }, ($grupo->campeonato_categoria_grupo_graduacoes));
+
+                $grupo->_graduacoes = $graduacoes;
+            }
+
+            return $grupo;
+        }, ($campeonatoCategoria->campeonato_categoria_grupos));
+
+   
 
         $this->set(compact('campeonatoCategoria'));
     }

@@ -33,9 +33,7 @@ class GraduacoesController extends AppController
     public function view($id = null)
     {
         $graduaco = $this->Graduacoes->get($id, [
-            'contain' => [
-                'Alunos' => ['Academias', 'Cidades']
-            ],
+            'contain' => ['Alunos', 'CampeonatoCategoriaGrupoGraduacoes'],
         ]);
 
         $this->set(compact('graduaco'));

@@ -82,6 +82,7 @@ $this->Breadcrumbs->add([
           <th><?= __('Created') ?></th>
           <th><?= __('Updated') ?></th>
           <th><?= __('Codigo') ?></th>
+          <th><?= __('Graduações') ?></th>
           <th class="actions"><?= __('Actions') ?></th>
       </tr>
       <?php if (empty($campeonatoCategoria->campeonato_categoria_grupos)) { ?>
@@ -91,12 +92,13 @@ $this->Breadcrumbs->add([
             </td>
         </tr>
       <?php }else{ ?>
-        <?php foreach ($campeonatoCategoria->campeonato_categoria_grupos as $campeonatoCategoriaGrupos) : ?>
+        <?php foreach ($campeonatoCategoria->campeonato_categoria_grupos as $campeonatoCategoriaGrupos) :  ?>
         <tr>
             <td><?= h($campeonatoCategoriaGrupos->id) ?></td>
             <td><?= h($campeonatoCategoriaGrupos->created) ?></td>
             <td><?= h($campeonatoCategoriaGrupos->updated) ?></td>
             <td><?= h($campeonatoCategoriaGrupos->codigo) ?></td>
+            <td><?= h(implode(', ', $campeonatoCategoriaGrupos->_graduacoes)) ?></td>
             <td class="actions">
               <?= $this->Html->link(__('View'), ['controller' => 'CampeonatoCategoriaGrupos', 'action' => 'view', $campeonatoCategoriaGrupos->id], ['class'=>'btn btn-xs btn-outline-primary']) ?>
               <?= $this->Html->link(__('Edit'), ['controller' => 'CampeonatoCategoriaGrupos', 'action' => 'edit', $campeonatoCategoriaGrupos->id], ['class'=>'btn btn-xs btn-outline-primary']) ?>

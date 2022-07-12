@@ -23,6 +23,8 @@ class GraduacoesControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Graduacoes',
+        'app.Alunos',
+        'app.CampeonatoCategoriaGrupoGraduacoes',
     ];
 
     /**
