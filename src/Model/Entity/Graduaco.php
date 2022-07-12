@@ -11,7 +11,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property string|null $titulo
+ * @property string $titulo
+ * @property \App\Model\Entity\Aluno[] $alunos
  */
 class Graduaco extends Entity
 {
@@ -28,5 +29,6 @@ class Graduaco extends Entity
         'created' => true,
         'modified' => true,
         'titulo' => true,
+        'alunos' => true,
     ];
 }

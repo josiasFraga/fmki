@@ -8,8 +8,8 @@
 <?php
 $this->assign('title', __('Graduacoes'));
 $this->Breadcrumbs->add([
-    ['title' => 'Home', 'url' => '/'],
-    ['title' => 'List Graduacoes'],
+    ['title' => 'Dashboard', 'url' => '/'],
+    ['title' => __('List').' '.__('Graduacoes')],
 ]);
 ?>
 

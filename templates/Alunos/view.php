@@ -102,12 +102,12 @@ $this->Breadcrumbs->add([
 </div>
 
 
-<div class="related related-torneioInscricao view card">
+<div class="related related-campeonatoInscricao view card">
   <div class="card-header d-sm-flex">
-    <h3 class="card-title"><?= "Torneio Inscricao" ?> <?= __('Related') ?></h3>
+    <h3 class="card-title"><?= "Campeonato Inscricao" ?> <?= __('Related') ?></h3>
     <div class="card-toolbox">
-      <?= $this->Html->link(__('New'), ['controller' => 'TorneioInscricao' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
-      <?= $this->Html->link(__('List'), ['controller' => 'TorneioInscricao' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('New'), ['controller' => 'CampeonatoInscricao' , 'action' => 'add'], ['class' => 'btn btn-primary btn-sm']) ?>
+      <?= $this->Html->link(__('List'), ['controller' => 'CampeonatoInscricao' , 'action' => 'index'], ['class' => 'btn btn-primary btn-sm']) ?>
     </div>
   </div>
   <div class="card-body table-responsive p-0">
@@ -116,32 +116,32 @@ $this->Breadcrumbs->add([
           <th><?= __('Id') ?></th>
           <th><?= __('Created') ?></th>
           <th><?= __('Modified') ?></th>
-          <th><?= __('Torneio Id') ?></th>
+          <th><?= __('Campeonato Id') ?></th>
           <th><?= __('Aluno Id') ?></th>
           <th><?= __('Academia Id') ?></th>
           <th><?= __('Categoria Id') ?></th>
           <th class="actions"><?= __('Actions') ?></th>
       </tr>
-      <?php if (empty($aluno->torneio_inscricao)) { ?>
+      <?php if (empty($aluno->campeonato_inscricao)) { ?>
         <tr>
             <td colspan="8" class="text-muted">
               <?= __('record not found!') ?>
             </td>
         </tr>
       <?php }else{ ?>
-        <?php foreach ($aluno->torneio_inscricao as $torneioInscricao) : ?>
+        <?php foreach ($aluno->campeonato_inscricao as $campeonatoInscricao) : ?>
         <tr>
-            <td><?= h($torneioInscricao->id) ?></td>
-            <td><?= h($torneioInscricao->created) ?></td>
-            <td><?= h($torneioInscricao->modified) ?></td>
-            <td><?= h($torneioInscricao->torneio_id) ?></td>
-            <td><?= h($torneioInscricao->aluno_id) ?></td>
-            <td><?= h($torneioInscricao->academia_id) ?></td>
-            <td><?= h($torneioInscricao->categoria_id) ?></td>
+            <td><?= h($campeonatoInscricao->id) ?></td>
+            <td><?= h($campeonatoInscricao->created) ?></td>
+            <td><?= h($campeonatoInscricao->modified) ?></td>
+            <td><?= h($campeonatoInscricao->campeonato_id) ?></td>
+            <td><?= h($campeonatoInscricao->aluno_id) ?></td>
+            <td><?= h($campeonatoInscricao->academia_id) ?></td>
+            <td><?= h($campeonatoInscricao->categoria_id) ?></td>
             <td class="actions">
-              <?= $this->Html->link(__('View'), ['controller' => 'TorneioInscricao', 'action' => 'view', $torneioInscricao->id], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Html->link(__('Edit'), ['controller' => 'TorneioInscricao', 'action' => 'edit', $torneioInscricao->id], ['class'=>'btn btn-xs btn-outline-primary']) ?>
-              <?= $this->Form->postLink(__('Delete'), ['controller' => 'TorneioInscricao', 'action' => 'delete', $torneioInscricao->id], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $torneioInscricao->id)]) ?>
+              <?= $this->Html->link(__('View'), ['controller' => 'CampeonatoInscricao', 'action' => 'view', $campeonatoInscricao->id], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Html->link(__('Edit'), ['controller' => 'CampeonatoInscricao', 'action' => 'edit', $campeonatoInscricao->id], ['class'=>'btn btn-xs btn-outline-primary']) ?>
+              <?= $this->Form->postLink(__('Delete'), ['controller' => 'CampeonatoInscricao', 'action' => 'delete', $campeonatoInscricao->id], ['class'=>'btn btn-xs btn-outline-danger', 'confirm' => __('Are you sure you want to delete # {0}?', $campeonatoInscricao->id)]) ?>
             </td>
         </tr>
         <?php endforeach; ?>

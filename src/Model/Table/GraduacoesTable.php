@@ -44,6 +44,14 @@ class GraduacoesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Alunos', [
+            'foreignKey' => 'graduacao_id',
+        ]);
+        $this->hasMany('CampeonatoCategoriaGrupoGraduacoes', [
+            'foreignKey' => 'graduacao_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**
@@ -57,7 +65,8 @@ class GraduacoesTable extends Table
         $validator
             ->scalar('titulo')
             ->maxLength('titulo', 80)
-            ->allowEmptyString('titulo');
+            ->requirePresence('titulo', 'create')
+            ->notEmptyString('titulo');
 
         return $validator;
     }

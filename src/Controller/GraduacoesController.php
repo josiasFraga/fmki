@@ -33,7 +33,9 @@ class GraduacoesController extends AppController
     public function view($id = null)
     {
         $graduaco = $this->Graduacoes->get($id, [
-            'contain' => [],
+            'contain' => [
+                'Alunos' => ['Academias', 'Cidades']
+            ],
         ]);
 
         $this->set(compact('graduaco'));
@@ -50,11 +52,11 @@ class GraduacoesController extends AppController
         if ($this->request->is('post')) {
             $graduaco = $this->Graduacoes->patchEntity($graduaco, $this->request->getData());
             if ($this->Graduacoes->save($graduaco)) {
-                $this->Flash->success(__('The graduaco has been saved.'));
+                $this->Flash->success(__('The record has been saved').'.');
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The graduaco could not be saved. Please, try again.'));
+            $this->Flash->error(__('The record not be saved. Please, try again.'));
         }
         $this->set(compact('graduaco'));
     }
@@ -74,11 +76,11 @@ class GraduacoesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $graduaco = $this->Graduacoes->patchEntity($graduaco, $this->request->getData());
             if ($this->Graduacoes->save($graduaco)) {
-                $this->Flash->success(__('The graduaco has been saved.'));
+                $this->Flash->success(__('The record has been updated.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The graduaco could not be saved. Please, try again.'));
+            $this->Flash->error(__('The record could not be updated. Please, try again.'));
         }
         $this->set(compact('graduaco'));
     }
@@ -95,9 +97,9 @@ class GraduacoesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $graduaco = $this->Graduacoes->get($id);
         if ($this->Graduacoes->delete($graduaco)) {
-            $this->Flash->success(__('The graduaco has been deleted.'));
+            $this->Flash->success(__('The record has been deleted.'));
         } else {
-            $this->Flash->error(__('The graduaco could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The record could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -26,7 +26,7 @@ class AcademiasTableTest extends TestCase
     protected $fixtures = [
         'app.Academias',
         'app.Cidades',
-        'app.TorneioInscricao',
+        'app.CampeonatoInscricao',
         'app.Usuarios',
     ];
 

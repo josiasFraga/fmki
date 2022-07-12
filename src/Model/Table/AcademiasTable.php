@@ -14,7 +14,7 @@ use ArrayObject;
  * Academias Model
  *
  * @property \App\Model\Table\CidadesTable&\Cake\ORM\Association\BelongsTo $Cidades
- * @property \App\Model\Table\TorneioInscricaoTable&\Cake\ORM\Association\HasMany $TorneioInscricao
+ * @property \App\Model\Table\CampeonatoInscricaoTable&\Cake\ORM\Association\HasMany $CampeonatoInscricao
  * @property \App\Model\Table\UsuariosTable&\Cake\ORM\Association\HasMany $Usuarios
  *
  * @method \App\Model\Entity\Academia newEmptyEntity()
@@ -55,7 +55,7 @@ class AcademiasTable extends Table
             'foreignKey' => 'cidade_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('TorneioInscricao', [
+        $this->hasMany('CampeonatoInscricao', [
             'foreignKey' => 'academia_id',
         ]);
         $this->hasMany('Usuarios', [

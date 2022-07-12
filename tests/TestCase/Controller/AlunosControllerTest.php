@@ -26,7 +26,7 @@ class AlunosControllerTest extends TestCase
         'app.Graduacoes',
         'app.Academias',
         'app.Cidades',
-        'app.TorneioInscricao',
+        'app.CampeonatoInscricao',
     ];
 
     /**

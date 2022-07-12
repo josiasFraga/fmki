@@ -36,7 +36,7 @@ class AcademiasController extends AppController
     public function view($id = null)
     {
         $academia = $this->Academias->get($id, [
-            'contain' => ['Cidades', 'TorneioInscricao', 'Usuarios'],
+            'contain' => ['Cidades', 'CampeonatoInscricao', 'Usuarios'],
         ]);
 
         $this->set(compact('academia'));

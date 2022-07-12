@@ -20,8 +20,8 @@ class GraduacoesFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'created' => 1657549009,
-                'modified' => 1657549009,
+                'created' => 1657633937,
+                'modified' => 1657633937,
                 'titulo' => 'Lorem ipsum dolor sit amet',
             ],
         ];

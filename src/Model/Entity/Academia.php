@@ -21,7 +21,7 @@ use Cake\ORM\Entity;
  * @property string|null $instagram
  *
  * @property \App\Model\Entity\Cidade $cidade
- * @property \App\Model\Entity\TorneioInscricao[] $torneio_inscricao
+ * @property \App\Model\Entity\CampeonatoInscricao[] $campeonato_inscricao
  * @property \App\Model\Entity\Usuario[] $usuarios
  * @property \App\Model\Entity\Aluno[] $alunos
  */
@@ -48,7 +48,7 @@ class Academia extends Entity
         'facebook' => true,
         'instagram' => true,
         'cidade' => true,
-        'torneio_inscricao' => true,
+        'campeonato_inscricao' => true,
         'usuarios' => true,
         'alunos' => true,
     ];

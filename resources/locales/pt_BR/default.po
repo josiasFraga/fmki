@@ -422,3 +422,21 @@ msgstr "Novo Aluno"
 
 msgid "Add Aluno"
 msgstr "Adicionar Aluno"
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid "New Campeonato"
+msgstr "Novo Campeonato"
+
+msgid "New Campeonato Inscrico"
+msgstr "Nova Inscrição"
+
+msgid "New Campeonato Categoria"
+msgstr "Nova Categoria"
+
+msgid "New Campeonato Categoria Grupo"
+msgstr "Novo Grupo"
+
+msgid "New Campeonato Categoria Grupo Graduaco"
+msgstr "Nova Graduação"

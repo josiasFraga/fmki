@@ -7,10 +7,10 @@
 <?php
 $this->assign('title', __('Edit Graduaco'));
 $this->Breadcrumbs->add([
-    ['title' => 'Home', 'url' => '/'],
-    ['title' => 'List Graduacoes', 'url' => ['action' => 'index']],
-    ['title' => 'View', 'url' => ['action' => 'view', $graduaco->id]],
-    ['title' => 'Edit'],
+    ['title' => 'Dashboard', 'url' => '/'],
+    ['title' => __('List').' '.__('Graduacoes'), 'url' => ['action' => 'index']],
+    ['title' => __('View'), 'url' => ['action' => 'view', $graduaco->id]],
+    ['title' => __('Edit')],
 ]);
 ?>
 
@@ -26,16 +26,22 @@ $this->Breadcrumbs->add([
     <div class="">
       <?= $this->Form->postLink(
           __('Delete'),
-          ['action' => 'delete', $graduaco->id],
+          ['action' => __('delete'), $graduaco->id],
           ['confirm' => __('Are you sure you want to delete # {0}?', $graduaco->id), 'class' => 'btn btn-danger']
       ) ?>
     </div>
     <div class="ml-auto">
-      <?= $this->Form->button(__('Save')) ?>
-      <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
+          <?= $this->Form->button(__('Confirm Updates')) ?>
+          <?= $this->Html->link(__('Cancel'), ['action' => 'index'], ['class' => 'btn btn-default']) ?>
     </div>
   </div>
 
   <?= $this->Form->end() ?>
 </div>
 
+<?php
+$this->Html->css('CakeLte./AdminLTE/plugins/select2/css/select2.min', ['block' => true]);
+$this->Html->css('CakeLte./AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min', ['block' => true]);
+
+$this->Html->script('CakeLte./AdminLTE/plugins/select2/js/select2.full.min', ['block' => true]);
+$this->Html->script('CakeLte./AdminLTE/plugins/inputmask/jquery.inputmask.min', ['block' => true]);

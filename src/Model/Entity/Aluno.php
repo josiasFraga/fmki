@@ -29,7 +29,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Graduaco $graduaco
  * @property \App\Model\Entity\Academia $academia
  * @property \App\Model\Entity\Cidade $cidade
- * @property \App\Model\Entity\TorneioInscricao[] $torneio_inscricao
+ * @property \App\Model\Entity\CampeonatoInscricao[] $campeonato_inscricao
  */
 class Aluno extends Entity
 {
@@ -62,6 +62,6 @@ class Aluno extends Entity
         'graduaco' => true,
         'academia' => true,
         'cidade' => true,
-        'torneio_inscricao' => true,
+        'campeonato_inscricao' => true,
     ];
 }
