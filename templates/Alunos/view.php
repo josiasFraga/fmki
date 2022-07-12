@@ -17,7 +17,14 @@ $this->Breadcrumbs->add([
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($aluno->nome) ?></h2>
+    <h2 class="card-title d-flex align-items-center">
+      <div class="image">
+        <?= $this->Html->image('alunos/foto/'.$aluno->img_dir.'/square_'.$aluno->foto, ['class' => 'img-circle elevation-2', 'width' => '80px', 'height' => '80px']) ?>
+      </div>
+      <div class="info">
+        <?= h($aluno->nome) ?>
+      </div>
+    </h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -28,10 +35,6 @@ $this->Breadcrumbs->add([
         <tr>
             <th><?= __('Academia') ?></th>
             <td><?= $aluno->has('academia') ? $this->Html->link($aluno->academia->nome, ['controller' => 'Academias', 'action' => 'view', $aluno->academia->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Nome') ?></th>
-            <td><?= h($aluno->nome) ?></td>
         </tr>
         <tr>
             <th><?= __('Cidade') ?></th>
@@ -56,14 +59,6 @@ $this->Breadcrumbs->add([
         <tr>
             <th><?= __('Facebook') ?></th>
             <td><?= h($aluno->facebook) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Foto') ?></th>
-            <td><?= h($aluno->foto) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Img Dir') ?></th>
-            <td><?= h($aluno->img_dir) ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>

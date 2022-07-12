@@ -17,10 +17,14 @@ $this->Breadcrumbs->add([
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title">
-        <?= $this->Html->image('academias/logo/'.$academia->img_dir.'/'.$academia->logo, ["width"=>150]) ?>
+    <h2 class="card-title d-flex align-items-center">
+        <div class="image">
+          <?= $this->Html->image('academias/logo/'.$academia->img_dir.'/square_'.$academia->logo, ['class' => 'elevation-2', 'width' => '150px']) ?>
+        </div>
         
-        <?= h($academia->nome) ?> [<?= h($academia->id) ?>]
+        <div class="info">
+          <?= h($academia->nome) ?>
+        </div>
     </h2>
   </div>
   <div class="card-body table-responsive p-0">

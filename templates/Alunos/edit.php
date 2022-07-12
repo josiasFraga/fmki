@@ -15,20 +15,32 @@ $this->Breadcrumbs->add([
 ?>
 
 <div class="card card-primary card-outline">
-  <?= $this->Form->create($aluno) ?>
+  <?= $this->Form->create($aluno, ['type' => 'file']) ?>
+  <div class="card-title d-flex align-items-center pl-3 pt-4">
+    <div class="image">
+      <?= $this->Html->image('alunos/foto/'.$aluno->img_dir.'/square_'.$aluno->foto, ['class' => 'img-circle elevation-2', 'width' => '80px', 'height' => '80px']) ?>
+    </div>
+    
+    <div class="info">
+      <?= $this->Form->control('foto', ['type' => 'file', 'label' => 'Alterar Foto']); ?>
+    </div>
+  </div>
   <div class="card-body">
     <?php
-      echo $this->Form->control('graduacao_id', ['options' => $graduacoes]);
-      echo $this->Form->control('academia_id', ['options' => $academias]);
+      echo $this->Form->control('graduacao_id', ['options' => $graduacoes, 'class' => 'select2bs4']);
+      echo $this->Form->control('academia_id', ['options' => $academias, 'class' => 'select2bs4']);
       echo $this->Form->control('nome');
-      echo $this->Form->control('cidade_id', ['options' => $cidades, 'empty' => true]);
+      echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', @$aluno->cidade_id, 'cities', (!empty($aluno->id)), 'select2bs4');
       echo $this->Form->control('endereco');
-      echo $this->Form->control('telefone');
-      echo $this->Form->control('email');
+      echo $this->Form->control('telefone', [ 
+        'placeholder' => "(__) _____-____",
+        'data-inputmask' => "'mask': ['(99) 99999-9999', '(99) 99999-99999']",
+        'inputmode' => 'text',
+        'data-mask' => '',
+      ]);
+      echo $this->Form->control('email', ['type' => 'email']);
       echo $this->Form->control('instagram');
       echo $this->Form->control('facebook');
-      echo $this->Form->control('foto');
-      echo $this->Form->control('img_dir');
       echo $this->Form->control('peso');
       echo $this->Form->control('altura');
       echo $this->Form->control('nascimento');

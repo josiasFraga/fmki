@@ -16,21 +16,27 @@ $this->Breadcrumbs->add([
 
 <div class="card card-primary card-outline">
   <?= $this->Form->create($academia, ['type' => 'file']) ?>
-  <div class="card-body">
-    <div class='row'>
-      <div class='col-sm-3'>
-        <?= $this->Html->image('academias/logo/'.$academia->img_dir.'/'.$academia->logo, ["width"=>150]) ?>
-      </div>
-      <div class='col-sm-9'>
-        <?= $this->Form->control('logo', ['type' => 'file', 'label' => 'Alterar Logo']); ?>
-      </div>
+  <div class="card-title d-flex align-items-center pl-3 pt-4">
+    <div class="image">
+      <?= $this->Html->image('academias/logo/'.$academia->img_dir.'/square_'.$academia->logo, ['class' => 'elevation-2', 'width' => '150px']) ?>
     </div>
+    
+    <div class="info">
+      <?= $this->Form->control('logo', ['type' => 'file', 'label' => 'Alterar Logo']); ?>
+    </div>
+  </div>
+  <div class="card-body">
+
     <?php
       echo $this->Form->control('nome');
       echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', @$academia->cidade_id, 'cities', (!empty($academia->id)), 'select2bs4');
-
       echo $this->Form->control('endereco');
-      echo $this->Form->control('telefone');
+      echo $this->Form->control('telefone', [ 
+        'placeholder' => "(__) _____-____",
+        'data-inputmask' => "'mask': ['(99) 99999-9999', '(99) 99999-99999']",
+        'inputmode' => 'text',
+        'data-mask' => '',
+      ]);
       echo $this->Form->control('facebook');
       echo $this->Form->control('instagram');
     ?>
