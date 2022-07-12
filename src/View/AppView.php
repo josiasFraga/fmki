@@ -46,6 +46,7 @@ class AppView extends View
       parent::initialize();
       $this->loadHelper('Localization.Localization');
       $this->initializeCakeLte($options = [
+        'sidebar.mini' => false,
         'app-name' => 'FMKI',
         'app-logo' => 'logo.png',
       ]);

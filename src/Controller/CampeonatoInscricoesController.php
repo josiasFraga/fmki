@@ -51,6 +51,8 @@ class CampeonatoInscricoesController extends AppController
     {
         $campeonatoInscrico = $this->CampeonatoInscricoes->newEmptyEntity();
         if ($this->request->is('post')) {
+            debug($this->request->getData()); 
+            die();
             $campeonatoInscrico = $this->CampeonatoInscricoes->patchEntity($campeonatoInscrico, $this->request->getData());
             if ($this->CampeonatoInscricoes->save($campeonatoInscrico)) {
                 $this->Flash->success(__('The record has been saved').'.');
