@@ -11,6 +11,15 @@ namespace App\Controller;
  */
 class CampeonatoCategoriaGrupoGraduacoesController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->loadModel('CampeonatoCategoriaGrupoGraduacoes');
+        $CampeonatoCategoriaGrupoGraduacoes = $this->CampeonatoCategoriaGrupoGraduacoes->newEmptyEntity();
+        $this->Authorization->authorize($CampeonatoCategoriaGrupoGraduacoes);
+    }
     /**
      * Index method
      *

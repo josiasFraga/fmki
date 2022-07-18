@@ -8,8 +8,8 @@
 <?php
 $this->assign('title', __('Usuarios'));
 $this->Breadcrumbs->add([
-    ['title' => 'Home', 'url' => '/'],
-    ['title' => 'List Usuarios'],
+    ['title' => 'Dashboard', 'url' => '/'],
+    ['title' => __('List').' '.__('Usuarios')],
 ]);
 ?>
 
@@ -32,14 +32,14 @@ $this->Breadcrumbs->add([
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
+                    <th>Foto</th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
+                    <th><?= $this->Paginator->sort('nome') ?></th>
                     <th><?= $this->Paginator->sort('academia_id') ?></th>
+                    <th><?= $this->Paginator->sort('login') ?></th>
                     <th><?= $this->Paginator->sort('role') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('user') ?></th>
-                    <th><?= $this->Paginator->sort('foto') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -47,14 +47,14 @@ $this->Breadcrumbs->add([
                 <?php foreach ($usuarios as $usuario) : ?>
                     <tr>
                         <td><?= $this->Number->format($usuario->id) ?></td>
+                        <td><?= $this->Html->image('usuarios/foto/'.$usuario->img_dir.'/square_'.$usuario->foto, ["height"=> 50, "width"=>50]) ?></td>
                         <td><?= h($usuario->created) ?></td>
                         <td><?= h($usuario->modified) ?></td>
-                        <td><?= $usuario->has('academia') ? $this->Html->link($usuario->academia->id, ['controller' => 'Academias', 'action' => 'view', $usuario->academia->id]) : '' ?></td>
+                        <td><?= h($usuario->nome) ?></td>
+                        <td><?= $usuario->has('academia') ? $this->Html->link($usuario->academia->nome, ['controller' => 'Academias', 'action' => 'view', $usuario->academia->id]) : '' ?></td>
+                        <td><?= h($usuario->login) ?></td>
                         <td><?= h($usuario->role) ?></td>
                         <td><?= h($usuario->email) ?></td>
-                        <td><?= h($usuario->user) ?></td>
-                        <td><?= h($usuario->foto) ?></td>
-                        <td><?= h($usuario->name) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $usuario->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $usuario->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>

@@ -15,6 +15,12 @@ use Cake\ORM\Entity;
  * @property string $categoria
  * @property int|null $limite_min_idade
  * @property int $limite_max_idade
+ * @property float|null $limite_min_peso
+ * @property float|null $limite_max_peso
+ * @property float|null $limite_min_altura
+ * @property float|null $limite_max_altura
+ *
+ * @property \App\Model\Entity\CampeonatoCategoriaGrupo[] $campeonato_categoria_grupos
  */
 class CampeonatoCategoria extends Entity
 {
@@ -34,6 +40,10 @@ class CampeonatoCategoria extends Entity
         'categoria' => true,
         'limite_min_idade' => true,
         'limite_max_idade' => true,
+        'limite_min_peso' => true,
+        'limite_max_peso' => true,
+        'limite_min_altura' => true,
+        'limite_max_altura' => true,
         'campeonato_categoria_grupos' => true,
     ];
 }

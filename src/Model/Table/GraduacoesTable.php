@@ -10,7 +10,8 @@ use Cake\Validation\Validator;
 
 /**
  * Graduacoes Model
- *
+ * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\HasMany $Alunos
+ * 
  * @method \App\Model\Entity\Graduaco newEmptyEntity()
  * @method \App\Model\Entity\Graduaco newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Graduaco[] newEntities(array $data, array $options = [])
@@ -44,6 +45,10 @@ class GraduacoesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Alunos', [
+            'foreignKey' => 'graduacao_id',
+        ]);
     }
 
     /**

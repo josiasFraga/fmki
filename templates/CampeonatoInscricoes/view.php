@@ -38,10 +38,6 @@ $this->Breadcrumbs->add([
             <td><?= $campeonatoInscrico->has('campeonato_categoria') ? $this->Html->link($campeonatoInscrico->campeonato_categoria->titulo, ['controller' => 'CampeonatoCategorias', 'action' => 'view', $campeonatoInscrico->campeonato_categoria->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('Campeonato Diviso') ?></th>
-            <td><?= $campeonatoInscrico->has('campeonato_diviso') ? $this->Html->link($campeonatoInscrico->campeonato_diviso->id, ['controller' => 'CampeonatoDivisoes', 'action' => 'view', $campeonatoInscrico->campeonato_diviso->id]) : '' ?></td>
-        </tr>
-        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($campeonatoInscrico->id) ?></td>
         </tr>

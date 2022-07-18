@@ -28,13 +28,29 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
+//authent
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Identifier\IdentifierInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Cake\Routing\Router;
+use Psr\Http\Message\ServerRequestInterface;
+
+//author
+use Authorization\AuthorizationService;
+use Authorization\AuthorizationServiceInterface;
+use Authorization\AuthorizationServiceProviderInterface;
+use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Policy\OrmResolver;
+
 /**
  * Application setup class.
  *
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface, AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -67,6 +83,8 @@ class Application extends BaseApplication
         $this->addPlugin('CakeLte');
         $this->addPlugin('Localization', ['bootstrap' => false, 'routes' => true]);
         $this->addPlugin('Proffer');
+        $this->addPlugin('Authentication');
+        $this->addPlugin('Authorization');
     }
 
     /**
@@ -99,7 +117,8 @@ class Application extends BaseApplication
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
             ->add(new BodyParserMiddleware())
-
+            ->add(new AuthenticationMiddleware($this))
+            ->add(new AuthorizationMiddleware($this))
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
@@ -135,5 +154,70 @@ class Application extends BaseApplication
         $this->addPlugin('Migrations');
 
         // Load more plugins here
+    }
+
+    /**
+     * Returns a service provider instance.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @return \Authentication\AuthenticationServiceInterface
+     */
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        $service = new AuthenticationService();
+
+        // Define where users should be redirected to when they are not authenticated
+        $service->setConfig([
+            'unauthenticatedRedirect' => Router::url([
+                    'prefix' => false,
+                    'plugin' => null,
+                    'controller' => 'Usuarios',
+                    'action' => 'login',
+            ]),
+            'queryParam' => 'redirect',
+        ]);
+
+        $fields = [
+            IdentifierInterface::CREDENTIAL_USERNAME => 'login',
+            IdentifierInterface::CREDENTIAL_PASSWORD => 'password'
+        ];
+        
+        // Load the authenticators. Session should be first.
+        $service->loadAuthenticator('Authentication.Session',[
+            'resolver' => [
+                'className' => 'Authentication.Orm',
+                'userModel' => 'Usuarios',
+            ]
+        ]);
+        $service->loadAuthenticator('Authentication.Form', [
+            'resolver' => [
+                'className' => 'Authentication.Orm',
+                'userModel' => 'Usuarios',
+            ],
+            'fields' => $fields,
+            'loginUrl' => Router::url([
+                'prefix' => false,
+                'plugin' => null,
+                'controller' => 'Usuarios',
+                'action' => 'login',
+            ]),
+        ]);
+
+        // Load identifiers
+        $service->loadIdentifier('Authentication.Password', [
+            'fields' => $fields,
+            'resolver' => [
+                'className' => 'Authentication.Orm',
+                'userModel' => 'Usuarios',
+            ]
+        ]);
+
+        return $service;
+    }
+
+    public function getAuthorizationService(ServerRequestInterface $request): AuthorizationServiceInterface
+    {
+        $resolver = new OrmResolver();
+        return new AuthorizationService($resolver);
     }
 }

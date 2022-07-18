@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Authentication\PasswordHasher\DefaultPasswordHasher;
 
 /**
  * Usuario Entity
@@ -11,13 +12,14 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string $nome
  * @property int|null $academia_id
+ * @property string $login
+ * @property string $password
  * @property string|null $role
  * @property string|null $email
- * @property string|null $user
- * @property string|null $password
- * @property string $foto
- * @property string|null $name
+ * @property string|null $foto
+ * @property string|null $img_dir
  *
  * @property \App\Model\Entity\Academia $academia
  */
@@ -35,13 +37,14 @@ class Usuario extends Entity
     protected $_accessible = [
         'created' => true,
         'modified' => true,
+        'nome' => true,
         'academia_id' => true,
+        'login' => true,
+        'password' => true,
         'role' => true,
         'email' => true,
-        'user' => true,
-        'password' => true,
         'foto' => true,
-        'name' => true,
+        'img_dir' => true,
         'academia' => true,
     ];
 
@@ -53,4 +56,10 @@ class Usuario extends Entity
     protected $_hidden = [
         'password',
     ];
+    
+    protected function _setPassword(string $password)
+    {
+        $hasher = new DefaultPasswordHasher();
+        return $hasher->hash($password);
+    }
 }

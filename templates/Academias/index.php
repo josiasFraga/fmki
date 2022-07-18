@@ -36,6 +36,8 @@ $this->Breadcrumbs->add([
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th><?= $this->Paginator->sort('nome') ?></th>
+                    <th><?= $this->Paginator->sort('sensei') ?></th>
+                    <th><?= $this->Paginator->sort('estilo') ?></th>
                     <th><?= $this->Paginator->sort('cidade_id') ?></th>
                     <th><?= $this->Paginator->sort('endereco') ?></th>
                     <th><?= $this->Paginator->sort('telefone') ?></th>
@@ -52,6 +54,8 @@ $this->Breadcrumbs->add([
                         <td><?= h($academia->created) ?></td>
                         <td><?= h($academia->modified) ?></td>
                         <td><?= h($academia->nome) ?></td>
+                        <td><?= h($academia->sensei) ?></td>
+                        <td><?= h($academia->estilo) ?></td>
                         <td><?= $academia->has('cidade') ? $this->Html->link($academia->cidade->name, ['controller' => 'Cidades', 'action' => 'view', $academia->cidade->id]) : '' ?></td>
                         <td><?= h($academia->endereco) ?></td>
                         <td><?= h($academia->telefone) ?></td>

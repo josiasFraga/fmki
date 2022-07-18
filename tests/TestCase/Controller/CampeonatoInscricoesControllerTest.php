@@ -27,7 +27,6 @@ class CampeonatoInscricoesControllerTest extends TestCase
         'app.Alunos',
         'app.Academias',
         'app.CampeonatoCategorias',
-        'app.CampeonatoDivisoes',
     ];
 
     /**

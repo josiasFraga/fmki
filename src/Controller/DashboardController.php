@@ -20,6 +20,7 @@ class DashboardController extends AppController
      */
     public function index()
     {
+        $this->Authorization->skipAuthorization();
         $this->loadModel('Academias');
         $this->loadModel('Alunos');
         $this->loadModel('Campeonatos');
@@ -31,10 +32,15 @@ class DashboardController extends AppController
             'order' => [
                 'created DESC'
             ]
-        ])->first()->toArray();
+        ])->first();
+
+        $id_last_campeonato = 0;
+        if ( $last_campeonato != null ){
+            $last_campeonato->toArray();
+            $id_last_campeonato = $last_campeonato['id'];
+        }
         
 
-        $id_last_campeonato = $last_campeonato['id'];
         $n_inscricoes_last_campeonato =  $this->CampeonatoInscricoes->find('all')->where([
             'campeonato_id' => $id_last_campeonato
         ])->count();

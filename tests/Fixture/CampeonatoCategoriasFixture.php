@@ -20,12 +20,16 @@ class CampeonatoCategoriasFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'created' => 1657633361,
-                'modified' => 1657633361,
+                'created' => 1657891663,
+                'modified' => 1657891663,
                 'titulo' => 'Lorem ipsum dolor sit amet',
                 'categoria' => 'Lorem ipsum dolor sit amet',
                 'limite_min_idade' => 1,
                 'limite_max_idade' => 1,
+                'limite_min_peso' => 1,
+                'limite_max_peso' => 1,
+                'limite_min_altura' => 1,
+                'limite_max_altura' => 1,
             ],
         ];
         parent::init();

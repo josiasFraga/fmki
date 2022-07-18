@@ -18,10 +18,15 @@ class CampeonatoInscricoesController extends AppController
      */
     public function index()
     {
+
+        $this->request->allowMethod(['get']);
         $this->paginate = [
-            'contain' => ['Campeonatos', 'Alunos', 'Academias', 'CampeonatoCategorias', 'CampeonatoDivisoes'],
+            'contain' => ['Campeonatos', 'Alunos', 'Academias', 'CampeonatoCategorias'],
         ];
-        $campeonatoInscricoes = $this->paginate($this->CampeonatoInscricoes);
+
+        $user = $this->Authentication->getIdentity();
+        $query = $user->applyScope('index', $this->CampeonatoInscricoes->find('all'));
+        $campeonatoInscricoes = $this->paginate($query);
 
         $this->set(compact('campeonatoInscricoes'));
     }
@@ -36,8 +41,10 @@ class CampeonatoInscricoesController extends AppController
     public function view($id = null)
     {
         $campeonatoInscrico = $this->CampeonatoInscricoes->get($id, [
-            'contain' => ['Campeonatos', 'Alunos', 'Academias', 'CampeonatoCategorias', 'CampeonatoDivisoes'],
+            'contain' => ['Campeonatos', 'Alunos', 'Academias', 'CampeonatoCategorias'],
         ]);
+
+        $this->Authorization->authorize($campeonatoInscrico);
 
         $this->set(compact('campeonatoInscrico'));
     }
@@ -50,23 +57,70 @@ class CampeonatoInscricoesController extends AppController
     public function add()
     {
         $campeonatoInscrico = $this->CampeonatoInscricoes->newEmptyEntity();
-        if ($this->request->is('post')) {
-            debug($this->request->getData()); 
-            die();
-            $campeonatoInscrico = $this->CampeonatoInscricoes->patchEntity($campeonatoInscrico, $this->request->getData());
-            if ($this->CampeonatoInscricoes->save($campeonatoInscrico)) {
-                $this->Flash->success(__('The record has been saved').'.');
+        $user = $this->Authentication->getIdentity();
+        $this->Authorization->authorize($campeonatoInscrico);
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+            $dados = $this->request->getData();
+
+            if ( $user->role != 'admin' ) {
+                $dados['academia_id'] = $user->academia_id;
             }
-            $this->Flash->error(__('The record not be saved. Please, try again.'));
+
+            if ( !isset($dados['aluno_id']) || !is_array($dados['aluno_id']) || count($dados['aluno_id']) == 0 ) {
+                
+                $this->Flash->error(__('The record not be saved. Please, try again.'));
+
+            } else {
+                $this->loadModel('Alunos');
+                $this->loadModel('CampeonatoCategorias');
+                foreach($dados['aluno_id'] as $key => $aluno_id){
+                    $dados_aluno = $this->Alunos->get($aluno_id)->toArray();
+
+                    if ( !$dados_aluno || empty($dados_aluno) ){
+                        continue;
+                    }
+
+                    $dados_categoria = $this->CampeonatoCategorias->find('all')->where([
+                        'CampeonatoCategorias.id' => 2
+                    ])->first()->toArray();
+
+                    debug($dados_aluno);
+                    debug($dados_categoria);
+                    die();
+
+                    $dados_salvar[] = [
+                        'campeonato_id' => $dados['campeonato_id'],
+                        'aluno_id' => $aluno_id,
+                        'academia_id' => $dados_aluno['academia_id'],
+                    ];
+
+                }
+
+                debug($dados_salvar);
+                die();
+
+                $campeonatoInscrico = $this->CampeonatoInscricoes->patchEntity($campeonatoInscrico, $this->request->getData());
+                if ($this->CampeonatoInscricoes->save($campeonatoInscrico)) {
+                    $this->Flash->success(__('The record has been saved').'.');
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The record not be saved. Please, try again.'));
+
+            }
         }
         $campeonatos = $this->CampeonatoInscricoes->Campeonatos->find('list', ['limit' => 200])->all();
-        $alunos = $this->CampeonatoInscricoes->Alunos->find('list', ['limit' => 200])->all();
-        $academias = $this->CampeonatoInscricoes->Academias->find('list', ['limit' => 200])->all();
+        $alunos = $this->CampeonatoInscricoes->Alunos->find('list', ['limit' => 200]);
+        $query = $user->applyScope('index', $alunos);
+        $alunos = $query->all();
+
+        $academias = $this->CampeonatoInscricoes->Academias->find('list', ['limit' => 200]);
+        $query = $user->applyScope('index', $academias);
+        $academias = $query->all();
+
         $campeonatoCategorias = $this->CampeonatoInscricoes->CampeonatoCategorias->find('list', ['limit' => 200])->all();
-        $campeonatoDivisoes = $this->CampeonatoInscricoes->CampeonatoDivisoes->find('list', ['limit' => 200])->all();
-        $this->set(compact('campeonatoInscrico', 'campeonatos', 'alunos', 'academias', 'campeonatoCategorias', 'campeonatoDivisoes'));
+        $this->set(compact('campeonatoInscrico', 'campeonatos', 'alunos', 'academias', 'campeonatoCategorias'));
     }
 
     /**
@@ -94,8 +148,7 @@ class CampeonatoInscricoesController extends AppController
         $alunos = $this->CampeonatoInscricoes->Alunos->find('list', ['limit' => 200])->all();
         $academias = $this->CampeonatoInscricoes->Academias->find('list', ['limit' => 200])->all();
         $campeonatoCategorias = $this->CampeonatoInscricoes->CampeonatoCategorias->find('list', ['limit' => 200])->all();
-        $campeonatoDivisoes = $this->CampeonatoInscricoes->CampeonatoDivisoes->find('list', ['limit' => 200])->all();
-        $this->set(compact('campeonatoInscrico', 'campeonatos', 'alunos', 'academias', 'campeonatoCategorias', 'campeonatoDivisoes'));
+        $this->set(compact('campeonatoInscrico', 'campeonatos', 'alunos', 'academias', 'campeonatoCategorias'));
     }
 
     /**

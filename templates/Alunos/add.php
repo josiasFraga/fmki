@@ -21,7 +21,11 @@ $this->Breadcrumbs->add([
       echo $this->Form->control('graduacao_id', ['options' => $graduacoes, 'class' => 'select2bs4']);
       echo $this->Form->control('academia_id', ['options' => $academias, 'class' => 'select2bs4']);
       echo $this->Form->control('nome');
-      echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', @$aluno->cidade_id, 'cities', (!empty($aluno->id)), 'select2bs4');
+      echo $this->Form->control('sexo', ['options' => [
+        'Masculino' => 'Masculino',
+        'Feminino' => 'Feminino'
+      ]]);
+      echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', 592, 'cities', false, 'select2bs4');
       echo $this->Form->control('endereco');
       echo $this->Form->control('telefone', [ 
         'placeholder' => "(__) _____-____",
@@ -32,8 +36,8 @@ $this->Breadcrumbs->add([
       echo $this->Form->control('email', ['type' => 'email']);
       echo $this->Form->control('instagram');
       echo $this->Form->control('facebook');
-      echo $this->Form->control('peso');
-      echo $this->Form->control('altura');
+      echo $this->Form->control('peso', ['placeholder' => 'em Kg']);
+      echo $this->Form->control('altura', ['placeholder' => 'em cm']);
       echo $this->Form->control('nascimento');
       echo $this->Form->control('foto', ['type' => 'file']);
     ?>

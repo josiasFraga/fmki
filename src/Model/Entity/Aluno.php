@@ -25,6 +25,7 @@ use Cake\ORM\Entity;
  * @property float $peso
  * @property float $altura
  * @property \Cake\I18n\FrozenDate $nascimento
+ * @property string $sexo
  *
  * @property \App\Model\Entity\Graduaco $graduaco
  * @property \App\Model\Entity\Academia $academia
@@ -59,6 +60,7 @@ class Aluno extends Entity
         'peso' => true,
         'altura' => true,
         'nascimento' => true,
+        'sexo' => true,
         'graduaco' => true,
         'academia' => true,
         'cidade' => true,

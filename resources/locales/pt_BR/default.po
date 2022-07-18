@@ -440,3 +440,15 @@ msgstr "Novo Grupo"
 
 msgid "New Campeonato Categoria Grupo Graduaco"
 msgstr "Nova Graduação"
+
+msgid "Novo Usuário"
+msgstr "Novo Usuário"
+
+msgid "Password"
+msgstr "Senha"
+
+msgid "Please enter your email and password"
+msgstr "Por favor, digite seu login e senha abaixo"
+
+msgid "Do Login"
+msgstr "Entrar"

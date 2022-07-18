@@ -34,6 +34,14 @@ $this->Breadcrumbs->add([
             <td><?= h($academia->nome) ?></td>
         </tr>-->
         <tr>
+            <th><?= __('Sensei') ?></th>
+            <td><?= h($academia->sensei) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Estilo') ?></th>
+            <td><?= h($academia->estilo) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Cidade') ?></th>
             <td><?= $academia->has('cidade') ? $this->Html->link($academia->cidade->name, ['controller' => 'Cidades', 'action' => 'view', $academia->cidade->id]) : '' ?></td>
         </tr>
@@ -190,4 +198,3 @@ $this->Breadcrumbs->add([
     </table>
   </div>
 </div>
-

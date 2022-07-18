@@ -14,7 +14,6 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\GraduacoesTable&\Cake\ORM\Association\BelongsTo $Graduacoes
  * @property \App\Model\Table\AcademiasTable&\Cake\ORM\Association\BelongsTo $Academias
  * @property \App\Model\Table\CidadesTable&\Cake\ORM\Association\BelongsTo $Cidades
- * @property \App\Model\Table\CampeonatoInscricaoTable&\Cake\ORM\Association\HasMany $CampeonatoInscricao
  *
  * @method \App\Model\Entity\Aluno newEmptyEntity()
  * @method \App\Model\Entity\Aluno newEntity(array $data, array $options = [])
@@ -61,7 +60,7 @@ class AlunosTable extends Table
         $this->belongsTo('Cidades', [
             'foreignKey' => 'cidade_id',
         ]);
-        $this->hasMany('CampeonatoInscricao', [
+        $this->hasMany('CampeonatoInscricoes', [
             'foreignKey' => 'aluno_id',
         ]);
         $this->addBehavior('Proffer.Proffer', [
@@ -160,6 +159,10 @@ class AlunosTable extends Table
             ->date('nascimento')
             ->requirePresence('nascimento', 'create')
             ->notEmptyDate('nascimento');
+
+        $validator
+            ->scalar('sexo')
+            ->notEmptyString('sexo');
 
         return $validator;
     }

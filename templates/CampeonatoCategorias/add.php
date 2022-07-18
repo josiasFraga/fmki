@@ -25,6 +25,10 @@ $this->Breadcrumbs->add([
       ]]);
       echo $this->Form->control('limite_min_idade');
       echo $this->Form->control('limite_max_idade');
+      echo $this->Form->control('limite_min_peso', ['placeholder' => 'Em Kg']);
+      echo $this->Form->control('limite_max_peso', ['placeholder' => 'Em Kg']);
+      echo $this->Form->control('limite_min_altura', ['placeholder' => 'Em cm']);
+      echo $this->Form->control('limite_max_altura', ['placeholder' => 'Em cm']);
     ?>
   </div>
 

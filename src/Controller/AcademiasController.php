@@ -18,11 +18,16 @@ class AcademiasController extends AppController
      */
     public function index()
     {
+        $this->request->allowMethod(['get']);
+        $academias = $this->Academias->newEmptyEntity();
+        $user = $this->Authentication->getIdentity();
+        $this->Authorization->authorize($academias);
+
         $this->paginate = [
             'contain' => ['Cidades'],
         ];
-        $academias = $this->paginate($this->Academias);
-
+        $query = $user->applyScope('index', $this->Academias->find('all'));
+        $academias = $this->paginate($query);
         $this->set(compact('academias'));
     }
 
@@ -35,10 +40,12 @@ class AcademiasController extends AppController
      */
     public function view($id = null)
     {
+        $this->request->allowMethod(['get']);
+        $user = $this->Authentication->getIdentity();
         $academia = $this->Academias->get($id, [
-            'contain' => ['Cidades', 'CampeonatoInscricao', 'Usuarios'],
+            'contain' => ['Cidades', 'Alunos', 'CampeonatoInscricoes', 'Usuarios'],
         ]);
-
+        $this->Authorization->authorize($academia);
         $this->set(compact('academia'));
     }
 
@@ -49,7 +56,10 @@ class AcademiasController extends AppController
      */
     public function add()
     {
+        $this->request->allowMethod(['get', 'post']);
+        $user = $this->Authentication->getIdentity();
         $academia = $this->Academias->newEmptyEntity();
+        $this->Authorization->authorize($academia);
         if ($this->request->is('post')) {
             $academia = $this->Academias->patchEntity($academia, $this->request->getData());
             if ($this->Academias->save($academia)) {
@@ -72,9 +82,12 @@ class AcademiasController extends AppController
      */
     public function edit($id = null)
     {
+        $this->request->allowMethod(['get', 'patch', 'post', 'put']);
+        $user = $this->Authentication->getIdentity();
         $academia = $this->Academias->get($id, [
             'contain' => [],
         ]);
+        $this->Authorization->authorize($academia);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $academia = $this->Academias->patchEntity($academia, $this->request->getData());
             if ($this->Academias->save($academia)) {
@@ -98,7 +111,10 @@ class AcademiasController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
+        $user = $this->Authentication->getIdentity();
         $academia = $this->Academias->get($id);
+        $this->Authorization->authorize($academia);
+
         if ($this->Academias->delete($academia)) {
             $this->Flash->success(__('The record has been deleted.'));
         } else {

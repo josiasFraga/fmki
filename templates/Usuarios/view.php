@@ -9,21 +9,36 @@
 <?php
 $this->assign('title', __('Usuario'));
 $this->Breadcrumbs->add([
-    ['title' => 'Home', 'url' => '/'],
-    ['title' => 'List Usuarios', 'url' => ['action' => 'index']],
-    ['title' => 'View'],
+    ['title' => 'Dashboard', 'url' => '/'],
+    ['title' => __('List').' '.__('Usuarios'), 'url' => ['action' => 'index']],
+    ['title' => __('View')],
 ]);
 ?>
 
 <div class="view card card-primary card-outline">
   <div class="card-header d-sm-flex">
-    <h2 class="card-title"><?= h($usuario->name) ?></h2>
+    <h2 class="card-title d-flex align-items-center">
+      <div class="image">
+        <?= $this->Html->image('usuarios/foto/'.$usuario->img_dir.'/square_'.$usuario->foto, ['class' => 'img-circle elevation-2', 'width' => '80px', 'height' => '80px']) ?>
+      </div>
+      <div class="info">
+        <?= h($usuario->nome) ?>
+      </div>
+    </h2>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
         <tr>
+            <th><?= __('Nome') ?></th>
+            <td><?= h($usuario->nome) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Academia') ?></th>
-            <td><?= $usuario->has('academia') ? $this->Html->link($usuario->academia->id, ['controller' => 'Academias', 'action' => 'view', $usuario->academia->id]) : '' ?></td>
+            <td><?= $usuario->has('academia') ? $this->Html->link($usuario->academia->nome, ['controller' => 'Academias', 'action' => 'view', $usuario->academia->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Login') ?></th>
+            <td><?= h($usuario->login) ?></td>
         </tr>
         <tr>
             <th><?= __('Role') ?></th>
@@ -32,18 +47,6 @@ $this->Breadcrumbs->add([
         <tr>
             <th><?= __('Email') ?></th>
             <td><?= h($usuario->email) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('User') ?></th>
-            <td><?= h($usuario->user) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Foto') ?></th>
-            <td><?= h($usuario->foto) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($usuario->name) ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>

@@ -38,6 +38,10 @@ $this->Breadcrumbs->add([
                     <th><?= $this->Paginator->sort('categoria') ?></th>
                     <th><?= $this->Paginator->sort('limite_min_idade') ?></th>
                     <th><?= $this->Paginator->sort('limite_max_idade') ?></th>
+                    <th><?= $this->Paginator->sort('limite_min_peso') ?></th>
+                    <th><?= $this->Paginator->sort('limite_max_peso') ?></th>
+                    <th><?= $this->Paginator->sort('limite_min_altura') ?></th>
+                    <th><?= $this->Paginator->sort('limite_max_altura') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -51,6 +55,10 @@ $this->Breadcrumbs->add([
                         <td><?= h($campeonatoCategoria->categoria) ?></td>
                         <td><?= $this->Number->format($campeonatoCategoria->limite_min_idade) ?></td>
                         <td><?= $this->Number->format($campeonatoCategoria->limite_max_idade) ?></td>
+                        <td><?= $this->Number->format($campeonatoCategoria->limite_min_peso) ?></td>
+                        <td><?= $this->Number->format($campeonatoCategoria->limite_max_peso) ?></td>
+                        <td><?= $this->Number->format($campeonatoCategoria->limite_min_altura) ?></td>
+                        <td><?= $this->Number->format($campeonatoCategoria->limite_max_altura) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $campeonatoCategoria->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $campeonatoCategoria->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>

@@ -29,6 +29,10 @@ $this->Breadcrumbs->add([
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
         <tr>
+            <th><?= __('Sexo') ?></th>
+            <td><?= h($aluno->sexo) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Graduaco') ?></th>
             <td><?= $aluno->has('graduaco') ? $this->Html->link($aluno->graduaco->titulo, ['controller' => 'Graduacoes', 'action' => 'view', $aluno->graduaco->id]) : '' ?></td>
         </tr>
@@ -149,4 +153,3 @@ $this->Breadcrumbs->add([
     </table>
   </div>
 </div>
-

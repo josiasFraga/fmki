@@ -7,14 +7,13 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use ArrayObject;
 
 /**
  * Academias Model
  *
  * @property \App\Model\Table\CidadesTable&\Cake\ORM\Association\BelongsTo $Cidades
- * @property \App\Model\Table\CampeonatoInscricaoTable&\Cake\ORM\Association\HasMany $CampeonatoInscricao
+ * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\HasMany $Alunos
+ * @property \App\Model\Table\CampeonatoInscricoesTable&\Cake\ORM\Association\HasMany $CampeonatoInscricoes
  * @property \App\Model\Table\UsuariosTable&\Cake\ORM\Association\HasMany $Usuarios
  *
  * @method \App\Model\Entity\Academia newEmptyEntity()
@@ -55,14 +54,13 @@ class AcademiasTable extends Table
             'foreignKey' => 'cidade_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('CampeonatoInscricao', [
+        $this->hasMany('Alunos', [
+            'foreignKey' => 'academia_id',
+        ]);
+        $this->hasMany('CampeonatoInscricoes', [
             'foreignKey' => 'academia_id',
         ]);
         $this->hasMany('Usuarios', [
-            'foreignKey' => 'academia_id',
-        ]);
-
-        $this->hasMany('Alunos', [
             'foreignKey' => 'academia_id',
         ]);
         $this->addBehavior('Proffer.Proffer', [
@@ -102,6 +100,18 @@ class AcademiasTable extends Table
             ->maxLength('nome', 150)
             ->requirePresence('nome', 'create')
             ->notEmptyString('nome');
+
+        $validator
+            ->scalar('sensei')
+            ->maxLength('sensei', 150)
+            ->requirePresence('sensei', 'create')
+            ->notEmptyString('sensei');
+
+        $validator
+            ->scalar('estilo')
+            ->maxLength('estilo', 150)
+            ->requirePresence('estilo', 'create')
+            ->notEmptyString('estilo');
 
         $validator
             ->integer('cidade_id')
@@ -149,17 +159,5 @@ class AcademiasTable extends Table
         $rules->add($rules->existsIn('cidade_id', 'Cidades'), ['errorField' => 'cidade_id']);
 
         return $rules;
-    }
-    
-
-    public function beforeMarshal(Event $event, ArrayObject $data, ArrayObject $options)
-    {
-
-        if (isset($data['cities_url'])) {
-            unset($data['cities_url']);
-        }
-        if (isset($data['estado_id'])) {
-            unset($data['estado_id']);
-        }
     }
 }

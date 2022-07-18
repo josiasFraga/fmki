@@ -20,8 +20,8 @@ class AlunosFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'created' => 1657589553,
-                'modified' => 1657589553,
+                'created' => 1657890025,
+                'modified' => 1657890025,
                 'graduacao_id' => 1,
                 'academia_id' => 1,
                 'nome' => 'Lorem ipsum dolor sit amet',
@@ -31,11 +31,12 @@ class AlunosFixture extends TestFixture
                 'email' => 'Lorem ipsum dolor sit amet',
                 'instagram' => 'Lorem ipsum dolor sit amet',
                 'facebook' => 'Lorem ipsum dolor sit amet',
-                'foto' => 'Lorem ipsum dolor sit amet',
+                'foto' => '',
                 'img_dir' => 'Lorem ipsum dolor sit amet',
                 'peso' => 1,
                 'altura' => 1,
-                'nascimento' => '2022-07-12',
+                'nascimento' => '2022-07-15',
+                'sexo' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

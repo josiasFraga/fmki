@@ -29,6 +29,8 @@ $this->Breadcrumbs->add([
 
     <?php
       echo $this->Form->control('nome');
+      echo $this->Form->control('sensei');
+      echo $this->Form->control('estilo');
       echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', @$academia->cidade_id, 'cities', (!empty($academia->id)), 'select2bs4');
       echo $this->Form->control('endereco');
       echo $this->Form->control('telefone', [ 

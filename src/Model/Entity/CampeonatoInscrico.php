@@ -21,7 +21,6 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Aluno $aluno
  * @property \App\Model\Entity\Academia $academia
  * @property \App\Model\Entity\CampeonatoCategoria $campeonato_categoria
- * @property \App\Model\Entity\CampeonatoDiviso $campeonato_diviso
  */
 class CampeonatoInscrico extends Entity
 {
@@ -46,6 +45,5 @@ class CampeonatoInscrico extends Entity
         'aluno' => true,
         'academia' => true,
         'campeonato_categoria' => true,
-        'campeonato_diviso' => true,
     ];
 }

@@ -19,9 +19,16 @@ $this->Breadcrumbs->add([
   <div class="card-body">
     <?php
       echo $this->Form->control('titulo');
-      echo $this->Form->control('categoria');
+      echo $this->Form->control('categoria', ['options' => [
+        'KATA E KUMITE MASCULINO' => 'KATA E KUMITE MASCULINO',
+        'KATA E KUMITE FEMININO' => 'KATA E KUMITE FEMININO'
+      ]]);
       echo $this->Form->control('limite_min_idade');
       echo $this->Form->control('limite_max_idade');
+      echo $this->Form->control('limite_min_peso', ['placeholder' => 'Em Kg']);
+      echo $this->Form->control('limite_max_peso', ['placeholder' => 'Em Kg']);
+      echo $this->Form->control('limite_min_altura', ['placeholder' => 'Em cm']);
+      echo $this->Form->control('limite_max_altura', ['placeholder' => 'Em cm']);
     ?>
   </div>
 

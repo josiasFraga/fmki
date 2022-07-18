@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
 /**
  * CampeonatoCategorias Model
  *
+ * @property \App\Model\Table\CampeonatoCategoriaGruposTable&\Cake\ORM\Association\HasMany $CampeonatoCategoriaGrupos
+ *
  * @method \App\Model\Entity\CampeonatoCategoria newEmptyEntity()
  * @method \App\Model\Entity\CampeonatoCategoria newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\CampeonatoCategoria[] newEntities(array $data, array $options = [])
@@ -74,6 +76,22 @@ class CampeonatoCategoriasTable extends Table
         $validator
             ->requirePresence('limite_max_idade', 'create')
             ->notEmptyString('limite_max_idade');
+
+        $validator
+            ->numeric('limite_min_peso')
+            ->allowEmptyString('limite_min_peso');
+
+        $validator
+            ->numeric('limite_max_peso')
+            ->allowEmptyString('limite_max_peso');
+
+        $validator
+            ->numeric('limite_min_altura')
+            ->allowEmptyString('limite_min_altura');
+
+        $validator
+            ->numeric('limite_max_altura')
+            ->allowEmptyString('limite_max_altura');
 
         return $validator;
     }

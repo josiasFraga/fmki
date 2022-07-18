@@ -15,7 +15,6 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\AlunosTable&\Cake\ORM\Association\BelongsTo $Alunos
  * @property \App\Model\Table\AcademiasTable&\Cake\ORM\Association\BelongsTo $Academias
  * @property \App\Model\Table\CampeonatoCategoriasTable&\Cake\ORM\Association\BelongsTo $CampeonatoCategorias
- * @property \App\Model\Table\CampeonatoDivisoesTable&\Cake\ORM\Association\BelongsTo $CampeonatoDivisoes
  *
  * @method \App\Model\Entity\CampeonatoInscrico newEmptyEntity()
  * @method \App\Model\Entity\CampeonatoInscrico newEntity(array $data, array $options = [])

@@ -12,6 +12,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  * @property string $nome
+ * @property string $sensei
+ * @property string $estilo
  * @property int $cidade_id
  * @property string|null $endereco
  * @property string|null $logo
@@ -21,9 +23,9 @@ use Cake\ORM\Entity;
  * @property string|null $instagram
  *
  * @property \App\Model\Entity\Cidade $cidade
- * @property \App\Model\Entity\CampeonatoInscricao[] $campeonato_inscricao
- * @property \App\Model\Entity\Usuario[] $usuarios
  * @property \App\Model\Entity\Aluno[] $alunos
+ * @property \App\Model\Entity\CampeonatoInscrico[] $campeonato_inscricoes
+ * @property \App\Model\Entity\Usuario[] $usuarios
  */
 class Academia extends Entity
 {
@@ -40,6 +42,8 @@ class Academia extends Entity
         'created' => true,
         'modified' => true,
         'nome' => true,
+        'sensei' => true,
+        'estilo' => true,
         'cidade_id' => true,
         'endereco' => true,
         'logo' => true,
@@ -48,8 +52,8 @@ class Academia extends Entity
         'facebook' => true,
         'instagram' => true,
         'cidade' => true,
-        'campeonato_inscricao' => true,
-        'usuarios' => true,
         'alunos' => true,
+        'campeonato_inscricoes' => true,
+        'usuarios' => true,
     ];
 }

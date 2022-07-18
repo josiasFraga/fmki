@@ -20,8 +20,8 @@ class CampeonatoInscricoesFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'created' => 1657648243,
-                'modified' => 1657648243,
+                'created' => 1657892205,
+                'modified' => 1657892205,
                 'campeonato_id' => 1,
                 'aluno_id' => 1,
                 'academia_id' => 1,

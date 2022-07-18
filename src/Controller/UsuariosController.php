@@ -11,6 +11,15 @@ namespace App\Controller;
  */
 class UsuariosController extends AppController
 {
+
+    // in src/Controller/UsersController.php
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->Authentication->allowUnauthenticated(['login', 'logout']);
+    }
+
     /**
      * Index method
      *
@@ -18,6 +27,11 @@ class UsuariosController extends AppController
      */
     public function index()
     {
+
+        $user = $this->Authentication->getIdentity();
+        $usuario = $this->Usuarios->newEmptyEntity();
+        $this->Authorization->authorize($usuario);
+
         $this->paginate = [
             'contain' => ['Academias'],
         ];
@@ -35,6 +49,11 @@ class UsuariosController extends AppController
      */
     public function view($id = null)
     {
+
+        $user = $this->Authentication->getIdentity();
+        $usuario = $this->Usuarios->newEmptyEntity();
+        $this->Authorization->authorize($usuario);
+
         $usuario = $this->Usuarios->get($id, [
             'contain' => ['Academias'],
         ]);
@@ -49,15 +68,22 @@ class UsuariosController extends AppController
      */
     public function add()
     {
+
+        $user = $this->Authentication->getIdentity();
+        $usuario = $this->Usuarios->newEmptyEntity();
+        $this->Authorization->authorize($usuario);
+
         $usuario = $this->Usuarios->newEmptyEntity();
         if ($this->request->is('post')) {
-            $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
+            $dados = $this->request->getData();
+            $dados['role'] = 'academy';
+            $usuario = $this->Usuarios->patchEntity($usuario, $dados);
             if ($this->Usuarios->save($usuario)) {
-                $this->Flash->success(__('The usuario has been saved.'));
+                $this->Flash->success(__('The record has been saved').'.');
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
+            $this->Flash->error(__('The record not be saved. Please, try again.'));
         }
         $academias = $this->Usuarios->Academias->find('list', ['limit' => 200])->all();
         $this->set(compact('usuario', 'academias'));
@@ -72,17 +98,24 @@ class UsuariosController extends AppController
      */
     public function edit($id = null)
     {
+
+        $user = $this->Authentication->getIdentity();
+        $usuario = $this->Usuarios->newEmptyEntity();
+        $this->Authorization->authorize($usuario);
+
         $usuario = $this->Usuarios->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $usuario = $this->Usuarios->patchEntity($usuario, $this->request->getData());
+            $dados = $this->request->getData();
+            unset($dados['role']);
+            $usuario = $this->Usuarios->patchEntity($usuario, $dados);
             if ($this->Usuarios->save($usuario)) {
-                $this->Flash->success(__('The usuario has been saved.'));
+                $this->Flash->success(__('The record has been updated.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The usuario could not be saved. Please, try again.'));
+            $this->Flash->error(__('The record could not be updated. Please, try again.'));
         }
         $academias = $this->Usuarios->Academias->find('list', ['limit' => 200])->all();
         $this->set(compact('usuario', 'academias'));
@@ -97,14 +130,40 @@ class UsuariosController extends AppController
      */
     public function delete($id = null)
     {
+
+        $user = $this->Authentication->getIdentity();
+        $usuario = $this->Usuarios->newEmptyEntity();
+        $this->Authorization->authorize($usuario);
+        
         $this->request->allowMethod(['post', 'delete']);
         $usuario = $this->Usuarios->get($id);
         if ($this->Usuarios->delete($usuario)) {
-            $this->Flash->success(__('The usuario has been deleted.'));
+            $this->Flash->success(__('The record has been deleted.'));
         } else {
-            $this->Flash->error(__('The usuario could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The record could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    
+    public function login()
+    {
+        $this->Authorization->skipAuthorization();
+        $this->viewBuilder()->setLayout('CakeLte.login');
+        $result = $this->Authentication->getResult();
+        // If the user is logged in send them away.
+        if ($result->isValid()) {
+            $target = $this->Authentication->getLoginRedirect() ?? '/dashboard';
+            return $this->redirect($target);
+        }
+        if ($this->request->is('post')) {
+            $this->Flash->error('Nome de usuários e/ou senha inválidos!');
+        }
+    }
+    public function logout()
+    {
+        $this->Authorization->skipAuthorization();
+        $this->Authentication->logout();
+        return $this->redirect(['controller' => 'Usuarios', 'action' => 'login']);
     }
 }

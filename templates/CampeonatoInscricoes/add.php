@@ -18,9 +18,14 @@ $this->Breadcrumbs->add([
   <?= $this->Form->create($campeonatoInscrico) ?>
   <div class="card-body">
     <?php
-      echo $this->Form->control('campeonato_id', ['options' => $campeonatos]);
-      echo $this->Form->control('aluno_id', ['options' => $alunos]);
-
+      echo $this->Form->control('campeonato_id', ['options' => $campeonatos, 'class' => 'select2bs4']);
+      echo $this->Form->control('aluno_id', [
+        'options' => $alunos,
+        'type' => 'select',
+        'multiple' => 'checkbox',
+        'empty' => true,
+        'required' => false
+      ]);
     ?>
   </div>
 

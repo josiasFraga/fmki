@@ -11,6 +11,16 @@ namespace App\Controller;
  */
 class CampeonatoCategoriasController extends AppController
 {
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+
+        $this->loadModel('CampeonatoCategorias');
+        $campeonato_categorias = $this->CampeonatoCategorias->newEmptyEntity();
+        $this->Authorization->authorize($campeonato_categorias);
+    }
+
     /**
      * Index method
      *
@@ -33,30 +43,8 @@ class CampeonatoCategoriasController extends AppController
     public function view($id = null)
     {
         $campeonatoCategoria = $this->CampeonatoCategorias->get($id, [
-            'contain' => [
-                'CampeonatoCategoriaGrupos' => ['CampeonatoCategoriaGrupoGraduacoes' => ['Graduacoes' => [
-                    'fields' => ['titulo']
-                ]]]
-            ],
+            'contain' => ['CampeonatoCategoriaGrupos'],
         ]);
-
-        $campeonatoCategoria->campeonato_categoria_grupos = array_map(function($grupo){
-            $grupo->_graduacoes = [];
-            if ( isset($grupo->campeonato_categoria_grupo_graduacoes) && count($grupo->campeonato_categoria_grupo_graduacoes) > 0 ) {
-
-                $graduacoes = array_map(function($grupo_graduacoes){
-                    if ( isset($grupo_graduacoes->graduaco) ) {
-                        return $grupo_graduacoes->graduaco->titulo;
-                    }
-                }, ($grupo->campeonato_categoria_grupo_graduacoes));
-
-                $grupo->_graduacoes = $graduacoes;
-            }
-
-            return $grupo;
-        }, ($campeonatoCategoria->campeonato_categoria_grupos));
-
-   
 
         $this->set(compact('campeonatoCategoria'));
     }

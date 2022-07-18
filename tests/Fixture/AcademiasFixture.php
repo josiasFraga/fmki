@@ -20,9 +20,11 @@ class AcademiasFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'created' => 1657578030,
-                'modified' => 1657578030,
+                'created' => 1657906672,
+                'modified' => 1657906672,
                 'nome' => 'Lorem ipsum dolor sit amet',
+                'sensei' => 'Lorem ipsum dolor sit amet',
+                'estilo' => 'Lorem ipsum dolor sit amet',
                 'cidade_id' => 1,
                 'endereco' => 'Lorem ipsum dolor sit amet',
                 'logo' => 'Lorem ipsum dolor sit amet',

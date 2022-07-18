@@ -38,7 +38,6 @@ $this->Breadcrumbs->add([
                     <th><?= $this->Paginator->sort('aluno_id') ?></th>
                     <th><?= $this->Paginator->sort('academia_id') ?></th>
                     <th><?= $this->Paginator->sort('categoria_id') ?></th>
-                    <th><?= $this->Paginator->sort('divisao_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -52,7 +51,7 @@ $this->Breadcrumbs->add([
                         <td><?= $campeonatoInscrico->has('aluno') ? $this->Html->link($campeonatoInscrico->aluno->nome, ['controller' => 'Alunos', 'action' => 'view', $campeonatoInscrico->aluno->id]) : '' ?></td>
                         <td><?= $campeonatoInscrico->has('academia') ? $this->Html->link($campeonatoInscrico->academia->nome, ['controller' => 'Academias', 'action' => 'view', $campeonatoInscrico->academia->id]) : '' ?></td>
                         <td><?= $campeonatoInscrico->has('campeonato_categoria') ? $this->Html->link($campeonatoInscrico->campeonato_categoria->titulo, ['controller' => 'CampeonatoCategorias', 'action' => 'view', $campeonatoInscrico->campeonato_categoria->id]) : '' ?></td>
-                        <td><?= $campeonatoInscrico->has('campeonato_diviso') ? $this->Html->link($campeonatoInscrico->campeonato_diviso->id, ['controller' => 'CampeonatoDivisoes', 'action' => 'view', $campeonatoInscrico->campeonato_diviso->id]) : '' ?></td>
+                        <td><?= $this->Number->format($campeonatoInscrico->divisao_id) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $campeonatoInscrico->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $campeonatoInscrico->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>

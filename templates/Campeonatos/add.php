@@ -22,7 +22,7 @@ $this->Breadcrumbs->add([
       echo $this->Form->control('inicio');
       echo $this->Form->control('fim');
       echo $this->Form->control('endereco');
-      echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', @$campeonato->cidade_id, 'cities', (!empty($campeonato->id)), 'select2bs4');
+      echo $this->Localization->generateBasicLocation('col-md-6 col-xs-12', 592, 'cities', false, 'select2bs4');
     ?>
   </div>
 

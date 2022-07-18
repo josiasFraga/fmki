@@ -38,6 +38,7 @@ $this->Breadcrumbs->add([
                     <th><?= $this->Paginator->sort('graduacao_id') ?></th>
                     <th><?= $this->Paginator->sort('academia_id') ?></th>
                     <th><?= $this->Paginator->sort('nome') ?></th>
+                    <th><?= $this->Paginator->sort('sexo') ?></th>
                     <th><?= $this->Paginator->sort('cidade_id') ?></th>
                     <th><?= $this->Paginator->sort('endereco') ?></th>
                     <th><?= $this->Paginator->sort('telefone') ?></th>
@@ -60,6 +61,7 @@ $this->Breadcrumbs->add([
                         <td><?= $aluno->has('graduaco') ? $this->Html->link($aluno->graduaco->titulo, ['controller' => 'Graduacoes', 'action' => 'view', $aluno->graduaco->id]) : '' ?></td>
                         <td><?= $aluno->has('academia') ? $this->Html->link($aluno->academia->nome, ['controller' => 'Academias', 'action' => 'view', $aluno->academia->id]) : '' ?></td>
                         <td><?= h($aluno->nome) ?></td>
+                        <td><?= h($aluno->sexo) ?></td>
                         <td><?= $aluno->has('cidade') ? $this->Html->link($aluno->cidade->name, ['controller' => 'Cidades', 'action' => 'view', $aluno->cidade->id]) : '' ?></td>
                         <td><?= h($aluno->endereco) ?></td>
                         <td><?= h($aluno->telefone) ?></td>

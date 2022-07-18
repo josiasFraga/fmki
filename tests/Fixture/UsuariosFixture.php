@@ -20,15 +20,16 @@ class UsuariosFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'created' => 1657549089,
-                'modified' => 1657549089,
+                'created' => 1657974591,
+                'modified' => 1657974591,
+                'nome' => 'Lorem ipsum dolor sit amet',
                 'academia_id' => 1,
+                'login' => 'Lorem ipsum dolor sit amet',
+                'password' => 'Lorem ipsum dolor sit amet',
                 'role' => 'Lorem ipsum dolor sit amet',
                 'email' => 'Lorem ipsum dolor sit amet',
-                'user' => 'Lorem ipsum dolor sit amet',
-                'password' => 'Lorem ipsum dolor sit amet',
-                'foto' => 'Lorem ipsum dolor sit amet',
-                'name' => 'Lorem ipsum dolor sit amet',
+                'foto' => '',
+                'img_dir' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

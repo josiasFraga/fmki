@@ -49,6 +49,16 @@ class AppController extends Controller
 
         $this->set(compact('actual_controller', 'actual_action'));
 
+        $this->loadComponent('Authentication.Authentication');
+        $this->loadComponent('Authorization.Authorization');
+        $usuario = $this->Authentication->getIdentity();
+
+        if ( $usuario ){
+            $this->loadModel('Usuarios');
+            $dados_usuario = $this->Usuarios->get($usuario->id)->toArray();
+            $this->set(compact('dados_usuario'));
+        }
+
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html

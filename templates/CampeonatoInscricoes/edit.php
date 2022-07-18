@@ -20,9 +20,8 @@ $this->Breadcrumbs->add([
     <?php
       echo $this->Form->control('campeonato_id', ['options' => $campeonatos]);
       echo $this->Form->control('aluno_id', ['options' => $alunos]);
-      echo $this->Form->control('academia_id', ['options' => $academias, 'disabled' => 'disabled']);
-      echo $this->Form->control('categoria_id', ['options' => $campeonatoCategorias, 'disabled' => 'disabled']);
-      echo $this->Form->control('divisao_id', ['options' => $campeonatoDivisoes, 'empty' => true, 'disabled' => 'disabled']);
+      echo $this->Form->control('academia_id', ['options' => $academias]);
+      echo $this->Form->control('categoria_id', ['options' => $campeonatoCategorias]);
     ?>
   </div>
 

@@ -42,13 +42,35 @@ class UsuariosTable extends Table
         parent::initialize($config);
 
         $this->setTable('usuarios');
-        $this->setDisplayField('name');
+        $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Academias', [
             'foreignKey' => 'academia_id',
+        ]);
+        $this->addBehavior('Proffer.Proffer', [
+            'foto' => [	// The name of your upload field
+                'root' => ROOT . DS . 'webroot' . DS . 'img', // Customise the root upload folder here, or omit to use the default
+                'dir' => 'img_dir',	// The name of the field to store the folder
+                'thumbnailSizes' => [ // Declare your thumbnails
+                    'square' => [	// Define the prefix of your thumbnail
+                        'w' => 200,	// Width
+                        'h' => 200,	// Height
+                        'jpeg_quality'	=> 100
+                    ],
+                    'portrait' => [		// Define a second thumbnail
+                        'w' => 100,
+                        'h' => 300
+                    ],
+                    'mobile' => [			// Create a smaller copy based on width or height that respects ratio
+                        'w' => 421,		// Height can be omitted (or vice versa)
+                        'upsize' => false	// Prevent the image from being upsized if it is narrower than specified width
+                    ]
+                ],
+                'thumbnailMethod' => 'gd'	// Options are Imagick or Gd
+            ]
         ]);
     }
 
@@ -61,8 +83,27 @@ class UsuariosTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->scalar('nome')
+            ->maxLength('nome', 150)
+            ->requirePresence('nome', 'create')
+            ->notEmptyString('nome');
+
+        $validator
             ->integer('academia_id')
             ->allowEmptyString('academia_id');
+
+        $validator
+            ->scalar('login')
+            ->maxLength('login', 50)
+            ->requirePresence('login', 'create')
+            ->notEmptyString('login')
+            ->add('login', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->scalar('password')
+            ->maxLength('password', 100)
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password');
 
         $validator
             ->scalar('role')
@@ -74,25 +115,12 @@ class UsuariosTable extends Table
             ->allowEmptyString('email');
 
         $validator
-            ->scalar('user')
-            ->maxLength('user', 50)
-            ->allowEmptyString('user')
-            ->add('user', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmptyString('foto');
 
         $validator
-            ->scalar('password')
-            ->maxLength('password', 50)
-            ->allowEmptyString('password');
-
-        $validator
-            ->scalar('foto')
-            ->maxLength('foto', 150)
-            ->notEmptyString('foto');
-
-        $validator
-            ->scalar('name')
-            ->maxLength('name', 150)
-            ->allowEmptyString('name');
+            ->scalar('img_dir')
+            ->maxLength('img_dir', 150)
+            ->allowEmptyString('img_dir');
 
         return $validator;
     }
@@ -106,7 +134,7 @@ class UsuariosTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['user'], ['allowMultipleNulls' => true]), ['errorField' => 'user']);
+        $rules->add($rules->isUnique(['login']), ['errorField' => 'login']);
         $rules->add($rules->existsIn('academia_id', 'Academias'), ['errorField' => 'academia_id']);
 
         return $rules;
