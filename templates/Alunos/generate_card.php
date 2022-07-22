@@ -7,11 +7,11 @@
     h1{ font-size: 14px; font-weight: bold; margin-top: 0.3cm; margin-bottom: 0.1cm;}
     .photo{ width: 100%; background-color: #CCC;}
     .label{ font-weight: normal; font-size: 7px;}
-    .dado{ font-size: 14px;}
+    .dado{ font-size: 10px;}
     p{ display: block; width: 100%;}
     .text-right{ text-align: right;}
     .font-bold{ font-weight:bold;}
-    .mb-2{ margin-bottom: 6px;}
+    .mb-2{ margin-bottom: 7px;}
 </style>
 <div style="height: 100%; width: 100%; display: flex; justify-content: center;">
     <div style="width: 18cm; height: 6cm; background: rgb(255,0,0);  background: linear-gradient(180deg, rgba(255,0,0,1) 0%, rgba(255,255,255,1) 65%); flex-direction: row; display: flex;">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div style="padding: 10px; display: flex; flex: 1">
-            <div style="background-color: #FFF; width: 100%; display: flex; flex-direction: column; flex: 1; justify-content: center; align-items: center;  background-image: url(<?= $this->Url->webroot('img') ?>/Misc/bg_card.jpeg); background-size: cover">
+            <div style="background-color: #FFF; width: 100%; display: flex; flex-direction: column; flex: 1; justify-content: center; align-items: center;  background-image: url(<?= $this->Url->webroot('img') ?>/misc/bg_card.jpeg); background-size: cover">
                 <?= $this->Html->image("https://fmki.com.br/wp-content/uploads/2022/04/logo.png", ["width"=>"100px", "height" => "100px"]) ?>
        
                 <p style="text-align: center; margin-top: 15px"><strong>www.fmki.com.br</strong></p>
