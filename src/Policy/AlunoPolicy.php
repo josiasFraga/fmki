@@ -72,6 +72,16 @@ class AlunoPolicy
         
     }
 
+    public function canGenerateCard(IdentityInterface $user, Aluno $aluno)
+    {
+        if ( $user->role == 'admin' ){
+            return true;
+        }
+
+        return $this->isOwner($user, $aluno);
+        
+    }
+
     private function isOwner($user, $aluno) {
        return $user->academia_id == $aluno->academia_id;
     }

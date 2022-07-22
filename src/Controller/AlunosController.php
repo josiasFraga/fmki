@@ -137,4 +137,20 @@ class AlunosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function generateCard($id = null)
+    {
+        $this->viewBuilder()->setLayout('ajax');
+
+        $aluno = $this->Alunos->get($id, [
+            'contain' => ['Graduacoes', 'Academias'],
+        ]);
+
+        $this->Authorization->authorize($aluno);
+
+        $this->set(compact('aluno'));
+
+
+        
+    }
 }

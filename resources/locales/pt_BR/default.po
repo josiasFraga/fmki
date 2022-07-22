@@ -452,3 +452,6 @@ msgstr "Por favor, digite seu login e senha abaixo"
 
 msgid "Do Login"
 msgstr "Entrar"
+
+msgid "Generate Card"
+msgstr "Grar Cartão"

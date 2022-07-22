@@ -73,6 +73,7 @@ $this->Breadcrumbs->add([
                         <td><?= h($aluno->nascimento) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $aluno->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
+                            <?= $this->Html->link(__('Generate Card'), ['action' => 'generate_card', $aluno->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false, 'target' => "_BLANK"]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $aluno->id], ['class' => 'btn btn-xs btn-outline-primary', 'escape' => false]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $aluno->id], ['class' => 'btn btn-xs btn-outline-danger', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $aluno->id)]) ?>
                         </td>
